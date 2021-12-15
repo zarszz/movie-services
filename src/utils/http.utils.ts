@@ -1,5 +1,10 @@
 import type { Response } from 'express';
 
+export type ErrorMessage = {
+  property: string;
+  message: string[];
+};
+
 export function makeResponse<T>(
   response: Response,
   success: boolean,
@@ -12,5 +17,18 @@ export function makeResponse<T>(
     code,
     data,
     message,
+  });
+}
+
+export function makeErrorResponse(
+  response: Response,
+  code: number,
+  errors: ErrorMessage | ErrorMessage[],
+  message: string,
+): Response {
+  return response.status(code).send({
+    success: false,
+    message,
+    errors,
   });
 }
