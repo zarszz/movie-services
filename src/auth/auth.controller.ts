@@ -4,12 +4,15 @@ import {
   Body,
   UseInterceptors,
   UploadedFile,
-  BadRequestException,
+  Res,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Response } from 'express';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
-import { CreateUserDto } from './create-user-dto';
+import { makeResponse } from 'src/utils/http.utils';
+import { CreateUserDto } from './dto/create-user-dto';
+import { LoginDto } from './dto/login-dto';
 
 @Controller('auth')
 export class AuthController {
@@ -18,22 +21,35 @@ export class AuthController {
   @Post('register')
   @UseInterceptors(FileInterceptor('avatar'))
   async register(
+    @Res() res,
     @UploadedFile() file: Express.Multer.File,
     @Body() userDto: CreateUserDto,
-  ): Promise<User> {
+  ): Promise<Response> {
     try {
-      if (!file) throw new BadRequestException('Not image provided');
+      if (!file) throw new Error('Not image provided');
       userDto.avatar = file.originalname;
       const createdUser: User = await this.userService.create(<User>userDto);
-      return createdUser;
+      return makeResponse(
+        res,
+        true,
+        201,
+        createdUser,
+        'user created successfully',
+      );
     } catch (error) {
       console.log(error.message);
-      return error;
+      return makeResponse(res, false, 400, null, error);
     }
   }
 
   @Post('login')
-  login() {
-    return true;
+  async login(@Res() response, @Body() loginDto: LoginDto): Promise<Response> {
+    try {
+      const user: User = await this.userService.findByEmail(loginDto.email);
+      if (!user) throw new Error('Username or password incorrect');
+      return makeResponse(response, true, 200, user, 'Success Login');
+    } catch (error) {
+      return makeResponse(response, false, 400, null, error.message);
+    }
   }
 }
