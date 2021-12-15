@@ -11,12 +11,17 @@ import { Response } from 'express';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { makeResponse } from 'src/utils/http.utils';
+import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user-dto';
 import { LoginDto } from './dto/login-dto';
+import { SuccessLogin } from './entity/login';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly userService: UsersService) {}
+  constructor(
+    private readonly userService: UsersService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('register')
   @UseInterceptors(FileInterceptor('avatar'))
@@ -45,7 +50,7 @@ export class AuthController {
   @Post('login')
   async login(@Res() response, @Body() loginDto: LoginDto): Promise<Response> {
     try {
-      const user: User = await this.userService.findByEmail(loginDto.email);
+      const user: SuccessLogin = await this.authService.login(loginDto);
       if (!user) throw new Error('Username or password incorrect');
       return makeResponse(response, true, 200, user, 'Success Login');
     } catch (error) {
