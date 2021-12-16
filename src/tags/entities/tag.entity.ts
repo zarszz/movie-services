@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { MovieTag } from 'src/movietags/entity/movietags.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Tag {
@@ -7,4 +8,7 @@ export class Tag {
 
   @Column()
   name: string;
+
+  @OneToMany(() => MovieTag, (movieTag) => movieTag)
+  movieTags: MovieTag[];
 }

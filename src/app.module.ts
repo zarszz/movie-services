@@ -6,10 +6,12 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { getConnectionOptions } from 'typeorm';
-
-import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule as ConfigAppModule } from './config/config.module';
 import { TagsModule } from './tags/tags.module';
+import { MovietagsModule } from './movietags/movietags.module';
+import { MoviesModule } from './movies/movies.module';
+
+import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 @Module({
   imports: [
@@ -29,6 +31,8 @@ import { TagsModule } from './tags/tags.module';
     UsersModule,
     AuthModule,
     TagsModule,
+    MovietagsModule,
+    MoviesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
