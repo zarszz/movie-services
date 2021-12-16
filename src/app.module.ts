@@ -9,6 +9,7 @@ import { getConnectionOptions } from 'typeorm';
 
 import type { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule as ConfigAppModule } from './config/config.module';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -20,12 +21,14 @@ import { ConfigModule as ConfigAppModule } from './config/config.module';
           await getConnectionOptions(),
           {
             autoLoadEntities: true,
+            synchronize: true,
           },
         );
       },
     }),
     UsersModule,
     AuthModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
