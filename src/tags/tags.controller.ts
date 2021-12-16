@@ -8,6 +8,7 @@ import {
   Delete,
   Res,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { TagsService } from './tags.service';
 import { CreateTagDto } from './dto/create-tag.dto';
@@ -15,12 +16,14 @@ import { UpdateTagDto } from './dto/update-tag.dto';
 import { Tag } from './entities/tag.entity';
 import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { AdminGuard } from 'src/auth/auth.guard';
 
 @Controller('backoffice/tags')
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
 
   @Post()
+  @UseGuards(AdminGuard)
   async create(@Res() response, @Body() createTagDto: CreateTagDto) {
     const tag: Tag = await this.tagsService.create(<Tag>createTagDto);
     return makeResponse(response, true, 200, tag, 'Operasi Berhasil');
@@ -43,6 +46,7 @@ export class TagsController {
   }
 
   @Patch(':id')
+  @UseGuards(AdminGuard)
   async update(
     @Res() response,
     @Param('id') id: string,
@@ -61,6 +65,7 @@ export class TagsController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   async remove(@Res() response, @Param('id') id: string) {
     const result: DeleteResult = await this.tagsService.remove(+id);
 
