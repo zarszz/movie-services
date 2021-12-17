@@ -8,7 +8,7 @@ export const filterImage = (_, file, callback) => {
 };
 
 export const getFileName = (_, file, callback) => {
-  const name = file.originalname.split('.')[0];
+  const name = file.originalname.split('.')[0].replace(' ', '');
   const fileExtName = extname(file.originalname);
   const randomName = Array(4)
     .fill(null)

@@ -8,13 +8,14 @@ import { AuthModule } from './auth/auth.module';
 import { getConnectionOptions } from 'typeorm';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule as ConfigAppModule } from './config/config.module';
-import { TagsModule } from './tags/tags.module';
 import { LoggerMiddleware } from './middleware/logger';
 import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { SchedulerModule } from './scheduler/scheduler.module';
 import { ScheduleModule } from '@nestjs/schedule';
+import { TagsModule } from './tags/tags.module';
+import { MoviesModule } from './movies/movies.module';
 
 @Module({
   imports: [
@@ -31,9 +32,7 @@ import { ScheduleModule } from '@nestjs/schedule';
         );
       },
     }),
-    MulterModule.register({
-      dest: './public',
-    }),
+    MulterModule.register(),
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'upload'),
       serveRoot: '/public',
@@ -42,6 +41,7 @@ import { ScheduleModule } from '@nestjs/schedule';
     UsersModule,
     AuthModule,
     TagsModule,
+    MoviesModule,
     SchedulerModule,
   ],
   controllers: [AppController],
