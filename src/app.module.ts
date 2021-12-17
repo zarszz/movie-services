@@ -13,6 +13,8 @@ import { LoggerMiddleware } from './middleware/logger';
 import { MulterModule } from '@nestjs/platform-express';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { SchedulerModule } from './scheduler/scheduler.module';
+import { ScheduleModule } from '@nestjs/schedule';
 
 @Module({
   imports: [
@@ -36,9 +38,11 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'upload'),
       serveRoot: '/public',
     }),
+    ScheduleModule.forRoot(),
     UsersModule,
     AuthModule,
     TagsModule,
+    SchedulerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
