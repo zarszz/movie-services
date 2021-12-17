@@ -10,6 +10,9 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ConfigModule as ConfigAppModule } from './config/config.module';
 import { TagsModule } from './tags/tags.module';
 import { LoggerMiddleware } from './middleware/logger';
+import { MulterModule } from '@nestjs/platform-express';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -25,6 +28,13 @@ import { LoggerMiddleware } from './middleware/logger';
           },
         );
       },
+    }),
+    MulterModule.register({
+      dest: './public',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'upload'),
+      serveRoot: '/public',
     }),
     UsersModule,
     AuthModule,
