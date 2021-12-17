@@ -1,11 +1,13 @@
-import { MovieTag } from 'src/movietags/entity/movietags.entity';
+import { Tag } from 'src/tags/entities/tag.entity';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
+  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 
@@ -35,6 +37,7 @@ export class Movie {
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
 
-  @OneToMany(() => MovieTag, (movieTag) => movieTag)
-  movieTags: MovieTag[];
+  @ManyToMany(() => Tag, { cascade: true })
+  @JoinTable()
+  movieTags: Tag[];
 }

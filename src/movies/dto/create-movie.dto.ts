@@ -16,4 +16,6 @@ export class CreateMovieDto {
   @IsNotEmpty()
   @IsArray()
   tags: string[];
+
+  poster: string;
 }

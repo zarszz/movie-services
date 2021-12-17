@@ -7,10 +7,10 @@ import { LocalStrategy } from './local.strategy';
 import { JwtStrategy } from './jwt.strategy';
 import { ConfigModule } from 'src/config/config.module';
 import { ConfigService } from 'src/config/config.service';
-
+import { AdminGuard } from './auth.guard';
 @Module({
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, LocalStrategy, JwtStrategy, AdminGuard],
   imports: [
     ConfigModule,
     JwtModule.register({
@@ -19,5 +19,6 @@ import { ConfigService } from 'src/config/config.service';
     }),
     UsersModule,
   ],
+  exports: [AdminGuard],
 })
 export class AuthModule {}

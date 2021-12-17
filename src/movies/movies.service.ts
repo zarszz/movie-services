@@ -13,15 +13,25 @@ export class MoviesService {
   ) {}
   create(createMovieDto: CreateMovieDto) {
     const { tags, ...data } = createMovieDto;
-    return this.movieRepository.save(data);
+    return this.movieRepository.create(data);
+  }
+  save(movie: Movie) {
+    return this.movieRepository.save(movie);
   }
 
   findAll() {
-    return this.movieRepository.find();
+    return this.movieRepository
+      .createQueryBuilder('movie')
+      .leftJoinAndSelect('movie.movieTags', 'tag')
+      .getMany();
   }
 
   findOne(id: number) {
-    return this.movieRepository.findOne(id);
+    return this.movieRepository
+      .createQueryBuilder('movie')
+      .leftJoinAndSelect('movie.movieTags', 'tag')
+      .where('movie.id = :id', { id })
+      .getMany();
   }
 
   update(id: number, updateMovieDto: UpdateMovieDto) {
@@ -30,5 +40,9 @@ export class MoviesService {
 
   remove(id: number) {
     return this.movieRepository.delete(id);
+  }
+
+  bulkInsert(movies: Movie[]) {
+    return this.movieRepository.insert(movies);
   }
 }

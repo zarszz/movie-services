@@ -8,9 +8,13 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
+import { diskStorage } from 'multer';
+import { ConfigService } from 'src/config/config.service';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from 'src/users/users.service';
+import { filterImage, getFileName } from 'src/utils/file.upload.utils';
 import { makeResponse } from 'src/utils/http.utils';
+import { logger } from 'src/utils/logger';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user-dto';
 import { LoginDto } from './dto/login-dto';
@@ -24,7 +28,15 @@ export class AuthController {
   ) {}
 
   @Post('register')
-  @UseInterceptors(FileInterceptor('avatar'))
+  @UseInterceptors(
+    FileInterceptor('avatar', {
+      storage: diskStorage({
+        destination: './upload/avatar',
+        filename: getFileName,
+      }),
+      fileFilter: filterImage,
+    }),
+  )
   async register(
     @Res() res,
     @UploadedFile() file: Express.Multer.File,
@@ -32,7 +44,8 @@ export class AuthController {
   ): Promise<Response> {
     try {
       if (!file) throw new Error('Not image provided');
-      userDto.avatar = file.originalname;
+      userDto.avatar =
+        new ConfigService().get('SERVE_STATIC') + '/avatar/' + file.filename;
       const createdUser: User = await this.userService.create(<User>userDto);
       return makeResponse(
         res,
@@ -42,7 +55,7 @@ export class AuthController {
         'user created successfully',
       );
     } catch (error) {
-      console.log(error.message);
+      logger.error(error.message);
       return makeResponse(res, false, 400, null, error);
     }
   }
