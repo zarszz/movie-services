@@ -7,11 +7,10 @@ import {
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
-  RelationId,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity()
+@Entity({ name: 'movies' })
 export class Movie {
   @PrimaryGeneratedColumn()
   id: number;
@@ -38,6 +37,16 @@ export class Movie {
   deletedAt: Date;
 
   @ManyToMany(() => Tag, { cascade: true })
-  @JoinTable()
+  @JoinTable({
+    name: 'movie_tag',
+    joinColumn: {
+      name: 'movie_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'tag_id',
+      referencedColumnName: 'id',
+    },
+  })
   movieTags: Tag[];
 }

@@ -16,6 +16,7 @@ import { SchedulerModule } from './scheduler/scheduler.module';
 import { ScheduleModule } from '@nestjs/schedule';
 import { TagsModule } from './tags/tags.module';
 import { MoviesModule } from './movies/movies.module';
+import { SeedersModule } from './seeders/seeders.module';
 
 @Module({
   imports: [
@@ -23,12 +24,8 @@ import { MoviesModule } from './movies/movies.module';
     ConfigAppModule.register(),
     TypeOrmModule.forRootAsync({
       useFactory: async (): Promise<TypeOrmModuleOptions> => {
-        return <TypeOrmModuleOptions>Object.assign(
-          await getConnectionOptions(),
-          {
-            autoLoadEntities: true,
-            synchronize: true,
-          },
+        return <TypeOrmModuleOptions>(
+          Object.assign(await getConnectionOptions())
         );
       },
     }),
@@ -43,6 +40,7 @@ import { MoviesModule } from './movies/movies.module';
     TagsModule,
     MoviesModule,
     SchedulerModule,
+    SeedersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

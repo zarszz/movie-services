@@ -3,11 +3,12 @@ import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
+import { UserSeederService } from './user.seeder.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
   controllers: [UsersController],
-  providers: [UsersService],
-  exports: [TypeOrmModule, UsersService],
+  providers: [UsersService, UserSeederService],
+  exports: [TypeOrmModule, UsersService, UserSeederService],
 })
 export class UsersModule {}
