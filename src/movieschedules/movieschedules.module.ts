@@ -14,5 +14,6 @@ import { StudiosModule } from 'src/studios/studios.module';
   ],
   controllers: [MovieSchedulesController],
   providers: [MovieSchedulesService],
+  exports: [MovieSchedulesService],
 })
 export class MovieSchedulesModule {}

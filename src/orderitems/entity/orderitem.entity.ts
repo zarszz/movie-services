@@ -4,32 +4,30 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  OneToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
-  Unique,
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity({ name: 'users' })
-@Unique(['email'])
-export class User {
+@Entity({ name: 'order_items' })
+export class OrderItem {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  name: string;
+  qty: number;
 
   @Column()
-  email: string;
+  price: number;
 
   @Column()
-  password: string;
+  sub_total_price: number;
 
   @Column()
-  avatar: string;
+  order_id: number;
 
-  @Column({ default: false })
-  isAdmin: boolean;
+  @Column()
+  movie_schedule_id: number;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -40,6 +38,6 @@ export class User {
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
 
-  @OneToMany(() => Order, (order) => order.user)
-  orders: Order[];
+  @ManyToOne(() => Order, (order) => order.order_items)
+  order: Order;
 }
