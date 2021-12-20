@@ -14,3 +14,11 @@ export interface Film {
   vote_average: number;
   vote_count: number;
 }
+
+export interface IMovie {
+  title: string;
+  overview: string;
+  play_until: string;
+  tags: string[];
+  poster: string;
+}
