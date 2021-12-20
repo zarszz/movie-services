@@ -23,7 +23,7 @@ export class CreateOrderTable1639831010868 implements MigrationInterface {
             type: 'int',
           },
           {
-            name: 'paymend_method',
+            name: 'payment_method',
             type: 'enum',
             enum: [
               'credit_card',

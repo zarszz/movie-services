@@ -20,6 +20,8 @@ import { SeedersModule } from './seeders/seeders.module';
 import { StudiosModule } from './studios/studios.module';
 import { MovieSchedulesModule } from './movieschedules/movieschedules.module';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
+import { OrdersModule } from './orders/orders.module';
+import { OrderitemsModule } from './orderitems/orderitems.module';
 
 @Module({
   imports: [
@@ -49,6 +51,8 @@ import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
     SeedersModule,
     StudiosModule,
     MovieSchedulesModule,
+    OrdersModule,
+    OrderitemsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
