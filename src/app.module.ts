@@ -17,6 +17,9 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { TagsModule } from './tags/tags.module';
 import { MoviesModule } from './movies/movies.module';
 import { SeedersModule } from './seeders/seeders.module';
+import { StudiosModule } from './studios/studios.module';
+import { MovieSchedulesModule } from './movieschedules/movieschedules.module';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
@@ -24,8 +27,11 @@ import { SeedersModule } from './seeders/seeders.module';
     ConfigAppModule.register(),
     TypeOrmModule.forRootAsync({
       useFactory: async (): Promise<TypeOrmModuleOptions> => {
-        return <TypeOrmModuleOptions>(
-          Object.assign(await getConnectionOptions())
+        return <TypeOrmModuleOptions>Object.assign(
+          await getConnectionOptions(),
+          {
+            namingStrategy: new SnakeNamingStrategy(),
+          },
         );
       },
     }),
@@ -41,6 +47,8 @@ import { SeedersModule } from './seeders/seeders.module';
     MoviesModule,
     SchedulerModule,
     SeedersModule,
+    StudiosModule,
+    MovieSchedulesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

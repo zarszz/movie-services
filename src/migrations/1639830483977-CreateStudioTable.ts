@@ -18,7 +18,7 @@ export class CreateStudioTable1639830483977 implements MigrationInterface {
             type: 'int',
           },
           {
-            name: 'studio_capacity',
+            name: 'seat_capacity',
             type: 'int',
           },
           {

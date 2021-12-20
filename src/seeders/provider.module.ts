@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { getConnectionOptions } from 'typeorm';
+import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 
 @Module({
   imports: [
@@ -11,7 +12,7 @@ import { getConnectionOptions } from 'typeorm';
         return <TypeOrmModuleOptions>Object.assign(
           await getConnectionOptions(),
           {
-            autoLoadEntities: true,
+            namingStrategy: new SnakeNamingStrategy(),
           },
         );
       },
