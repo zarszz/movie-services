@@ -11,11 +11,11 @@ import {
 import { MovieSchedulesService } from './movieschedules.service';
 import { CreateMoviescheduleDto } from './dto/create-movieschedule.dto';
 import { UpdateMoviescheduleDto } from './dto/update-movieschedule.dto';
-import { Studio } from 'src/studios/entities/studio.entity';
+import { Studio } from 'src/studios/entity/studio.entity';
 import { StudiosService } from 'src/studios/studios.service';
 import { MoviesService } from 'src/movies/movies.service';
-import { Movie } from 'src/movies/entities/movie.entity';
-import { Movieschedule } from './entities/movieschedule.entity';
+import { Movie } from 'src/movies/entity/movie.entity';
+import { Movieschedule } from './entity/movieschedule.entity';
 import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
 

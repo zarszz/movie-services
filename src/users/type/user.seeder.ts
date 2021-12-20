@@ -1,10 +1,10 @@
-export interface IUser {
+export type IUser = {
   name: string;
   email: string;
   password: string;
   avatar: string;
   isAdmin: boolean;
-}
+};
 
 export const users: IUser[] = [
   {

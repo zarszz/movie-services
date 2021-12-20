@@ -10,7 +10,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { ConfigService } from 'src/config/config.service';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/entity/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { filterImage, getFileName } from 'src/utils/file.upload.utils';
 import { makeResponse } from 'src/utils/http.utils';
@@ -18,7 +18,7 @@ import { logger } from 'src/utils/logger';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user-dto';
 import { LoginDto } from './dto/login-dto';
-import { SuccessLogin } from './entity/login';
+import { SuccessLogin } from './type/login';
 
 @Controller('auth')
 export class AuthController {

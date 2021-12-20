@@ -1,5 +1,5 @@
 import { IsArray, IsNotEmpty, IsString } from 'class-validator';
-import { Item, PaymentMethod } from '../entities/order.entity';
+import { Item, PaymentMethod } from '../entity/order.entity';
 
 export class CreateOrderDto {
   @IsArray()

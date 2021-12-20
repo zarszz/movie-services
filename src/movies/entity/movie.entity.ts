@@ -1,4 +1,4 @@
-import { Tag } from 'src/tags/entities/tag.entity';
+import { Tag } from 'src/tags/entity/tag.entity';
 import {
   Column,
   CreateDateColumn,

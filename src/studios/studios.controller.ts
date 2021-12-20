@@ -12,7 +12,7 @@ import {
 import { StudiosService } from './studios.service';
 import { CreateStudioDto } from './dto/create-studio.dto';
 import { UpdateStudioDto } from './dto/update-studio.dto';
-import { Studio } from './entities/studio.entity';
+import { Studio } from './entity/studio.entity';
 import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
 

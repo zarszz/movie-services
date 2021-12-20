@@ -2,7 +2,7 @@ import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { verify } from 'jsonwebtoken';
 import { ConfigService } from 'src/config/config.service';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/entity/user.entity';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
