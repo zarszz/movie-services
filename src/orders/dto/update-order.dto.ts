@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { IsArray, IsNotEmpty, IsString } from 'class-validator';
-import { Item, PaymentMethod } from '../entities/order.entity';
+import { Item, PaymentMethod } from '../entity/order.entity';
 import { CreateOrderDto } from './create-order.dto';
 
 export class UpdateOrderDto extends PartialType(CreateOrderDto) {

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Cron, CronExpression } from '@nestjs/schedule';
 import axios from 'axios';
 import { ConfigService } from 'src/config/config.service';
-import { Movie } from 'src/movies/entities/movie.entity';
+import { Movie } from 'src/movies/entity/movie.entity';
 import { MoviesService } from 'src/movies/movies.service';
 
 @Injectable()

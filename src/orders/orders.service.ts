@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Movieschedule } from 'src/movieschedules/entities/movieschedule.entity';
+import { Movieschedule } from 'src/movieschedules/entity/movieschedule.entity';
 import { MovieSchedulesService } from 'src/movieschedules/movieschedules.service';
 import { OrderItem } from 'src/orderitems/entity/orderitem.entity';
 import { OrderItemsService } from 'src/orderitems/orderitems.service';
@@ -8,7 +8,7 @@ import { logger } from 'src/utils/logger';
 import { Connection, Repository } from 'typeorm';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { Order, OrderDetail, OrderDetailItem } from './entities/order.entity';
+import { Order, OrderDetail, OrderDetailItem } from './entity/order.entity';
 
 enum ACTION {
   'CREATE',

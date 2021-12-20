@@ -1,4 +1,4 @@
-import { Order } from 'src/orders/entities/order.entity';
+import { Order } from 'src/orders/entity/order.entity';
 import {
   Column,
   CreateDateColumn,

@@ -10,7 +10,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { diskStorage } from 'multer';
 import { ConfigService } from 'src/config/config.service';
-import { User } from 'src/users/entities/user.entity';
+import { User } from 'src/users/entity/user.entity';
 import { UsersService } from 'src/users/users.service';
 import { filterImage, getFileName } from 'src/utils/file.upload.utils';
 import { makeResponse } from 'src/utils/http.utils';
