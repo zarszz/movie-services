@@ -43,6 +43,11 @@ export type OrderDetail = {
   item_details: OrderDetailItem[];
 };
 
+export type Item = {
+  movie_schedule_id: number;
+  qty: number;
+};
+
 @Entity({ name: 'orders' })
 export class Order {
   @PrimaryGeneratedColumn()
