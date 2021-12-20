@@ -8,7 +8,8 @@ import { logger } from 'src/utils/logger';
 import { Connection, Repository } from 'typeorm';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
-import { Order, OrderDetail, OrderDetailItem } from './entity/order.entity';
+import { Order } from './entity/order.entity';
+import { OrderDetail, OrderDetailItem } from './type/order.type';
 
 enum ACTION {
   'CREATE',

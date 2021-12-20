@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ConfigService } from 'src/config/config.service';
 import { Movie } from 'src/movies/entity/movie.entity';
 import { MoviesService } from 'src/movies/movies.service';
-import { Film, IMovie } from './entity/film.entity';
+import { Film, IMovie } from './type/film.type';
 
 @Injectable()
 export class CurrentPlayingFilmService {

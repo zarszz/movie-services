@@ -18,7 +18,7 @@ import { logger } from 'src/utils/logger';
 import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user-dto';
 import { LoginDto } from './dto/login-dto';
-import { SuccessLogin } from './entity/login';
+import { SuccessLogin } from './type/login';
 
 @Controller('auth')
 export class AuthController {

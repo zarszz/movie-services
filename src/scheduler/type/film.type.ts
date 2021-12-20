@@ -1,4 +1,4 @@
-export interface Film {
+export type Film = {
   adult: boolean;
   backdrop_path: string;
   genre_ids: string[];
@@ -13,12 +13,12 @@ export interface Film {
   video: boolean;
   vote_average: number;
   vote_count: number;
-}
+};
 
-export interface IMovie {
+export type IMovie = {
   title: string;
   overview: string;
   play_until: string;
   tags: string[];
   poster: string;
-}
+};
