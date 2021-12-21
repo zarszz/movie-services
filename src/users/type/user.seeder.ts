@@ -21,4 +21,11 @@ export const users: IUser[] = [
     avatar: 'https://via.placeholder.com/100',
     isAdmin: false,
   },
+  {
+    name: 'udin',
+    email: 'udin@email.com',
+    password: 'password',
+    avatar: 'https://via.placeholder.com/100',
+    isAdmin: false,
+  },
 ];
