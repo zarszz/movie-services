@@ -8,10 +8,12 @@ async function bootstrap() {
   const logger = appContext.get(Logger);
   const seeder = appContext.get(Seeder);
   try {
-    if (await seeder.seed()) logger.debug('Seeding complete !!');
+    logger.log('Seeder : Seeder started....');
+    if (await seeder.seed()) logger.debug('Seeder: Seeding complete !!');
   } catch (error) {
     logger.error('Seeding failed :' + error.message);
   } finally {
+    logger.log('Seeder : Seeder finished....');
     await appContext.close();
   }
 }
