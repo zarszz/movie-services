@@ -34,13 +34,13 @@ export class OrdersController {
     );
     if (!result)
       return makeResponse(response, false, 500, null, 'Checkout Gagal');
-    return makeResponse(response, true, 200, { ...result }, 'Checkout Success');
+    return makeResponse(response, true, 200, result, 'Checkout Success');
   }
 
   @Get()
   async findAll(@Res() res) {
     const results = await this.ordersService.findAll();
-    return makeResponse(res, true, 200, { ...results }, 'Operasi Berhasil');
+    return makeResponse(res, true, 200, results, 'Operasi Berhasil');
   }
 
   @Get(':id')
@@ -60,7 +60,7 @@ export class OrdersController {
     const results = await this.ordersService.update(+id, updateOrderDto);
     if (!results)
       return makeResponse(response, false, 400, null, 'Update Gagal');
-    return makeResponse(response, true, 200, { ...results }, 'Update Berhasil');
+    return makeResponse(response, true, 200, results, 'Update Berhasil');
   }
 
   @Delete(':id')
