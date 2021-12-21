@@ -1,5 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { MovieSeederService } from 'src/movies/move.seeder.service';
+import { StudioSeederService } from 'src/studios/studios.seeder.service';
 import { TagSeederService } from 'src/tags/tag.seeder.service';
 import { UserSeederService } from 'src/users/user.seeder.service';
 
@@ -10,6 +11,7 @@ export class Seeder {
     private readonly userSeederService: UserSeederService,
     private readonly tagSeederService: TagSeederService,
     private readonly movieSeederService: MovieSeederService,
+    private readonly studioSeederService: StudioSeederService,
   ) {}
   async seed() {
     try {
@@ -29,6 +31,14 @@ export class Seeder {
       );
       this.logger.debug(
         'No. of movies created : ' + moviessCreated.filter((tag) => tag).length,
+      );
+
+      const studioCreated = await Promise.all(
+        this.studioSeederService.create(),
+      );
+      this.logger.debug(
+        'No. of studios created : ' +
+          studioCreated.filter((studio) => studio).length,
       );
     } catch (error) {
       this.logger.error(error.message);
