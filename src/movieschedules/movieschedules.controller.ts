@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Res,
+  UseGuards,
 } from '@nestjs/common';
 import { MovieSchedulesService } from './movieschedules.service';
 import { CreateMoviescheduleDto } from './dto/create-movieschedule.dto';
@@ -18,6 +19,7 @@ import { Movie } from 'src/movies/entity/movie.entity';
 import { Movieschedule } from './entity/movieschedule.entity';
 import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { AdminGuard } from 'src/auth/auth.guard';
 
 @Controller('backoffice/schedules/movies')
 export class MovieSchedulesController {
@@ -28,6 +30,7 @@ export class MovieSchedulesController {
   ) {}
 
   @Post()
+  @UseGuards(AdminGuard)
   async create(
     @Res() response,
     @Body() createMoviescheduleDto: CreateMoviescheduleDto,
@@ -57,6 +60,7 @@ export class MovieSchedulesController {
   }
 
   @Get()
+  @UseGuards(AdminGuard)
   async findAll(@Res() res) {
     const movieSchedules: Movieschedule[] =
       await this.movieschedulesService.findAll();
@@ -70,6 +74,7 @@ export class MovieSchedulesController {
   }
 
   @Patch(':id')
+  @UseGuards(AdminGuard)
   async update(
     @Res() res,
     @Param('id') id: string,
@@ -89,6 +94,7 @@ export class MovieSchedulesController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   async remove(@Res() res, @Param('id') id: string) {
     const result: DeleteResult = await this.movieschedulesService.remove(+id);
 

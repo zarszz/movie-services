@@ -6,6 +6,7 @@ import { Order } from './entity/order.entity';
 import { MovieSchedulesModule } from 'src/movieschedules/movieschedules.module';
 import { OrderitemsModule } from 'src/orderitems/orderitems.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { CaslModule } from 'src/casl/casl.module';
 import { OrderSeederService } from './orders.seeder.service';
 
 @Module({
@@ -13,6 +14,7 @@ import { OrderSeederService } from './orders.seeder.service';
     TypeOrmModule.forFeature([Order]),
     MovieSchedulesModule,
     OrderitemsModule,
+    CaslModule,
     AuthModule,
   ],
   controllers: [OrdersController],

@@ -22,6 +22,7 @@ import { MovieSchedulesModule } from './movieschedules/movieschedules.module';
 import { SnakeNamingStrategy } from 'typeorm-naming-strategies';
 import { OrdersModule } from './orders/orders.module';
 import { OrderitemsModule } from './orderitems/orderitems.module';
+import { CaslModule } from './casl/casl.module';
 
 @Module({
   imports: [
@@ -53,6 +54,7 @@ import { OrderitemsModule } from './orderitems/orderitems.module';
     MovieSchedulesModule,
     OrdersModule,
     OrderitemsModule,
+    CaslModule,
   ],
   controllers: [AppController],
   providers: [AppService],

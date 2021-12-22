@@ -24,6 +24,7 @@
     "refresh": "npx typeorm schema:drop && npx typeorm migration:run && npm run seed"
   },
   "dependencies": {
+    "@casl/ability": "^5.4.3",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.1.5",
     "@nestjs/core": "^8.0.0",

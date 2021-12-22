@@ -8,6 +8,7 @@ import {
   Delete,
   Res,
   BadRequestException,
+  UseGuards,
 } from '@nestjs/common';
 import { StudiosService } from './studios.service';
 import { CreateStudioDto } from './dto/create-studio.dto';
@@ -15,24 +16,28 @@ import { UpdateStudioDto } from './dto/update-studio.dto';
 import { Studio } from './entity/studio.entity';
 import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
+import { AdminGuard } from 'src/auth/auth.guard';
 
 @Controller('backoffice/studios')
 export class StudiosController {
   constructor(private readonly studiosService: StudiosService) {}
 
   @Post()
+  @UseGuards(AdminGuard)
   async create(@Res() res, @Body() createStudioDto: CreateStudioDto) {
     const studio: Studio = await this.studiosService.create(createStudioDto);
     return makeResponse(res, true, 200, studio, 'Operasi Berhasil');
   }
 
   @Get()
+  @UseGuards(AdminGuard)
   async findAll(@Res() res) {
     const studios: Studio[] = await this.studiosService.findAll();
     return makeResponse(res, true, 200, studios, 'Operasi Berhasil');
   }
 
   @Get(':id')
+  @UseGuards(AdminGuard)
   async findOne(@Res() res, @Param('id') id: string) {
     const studio: Studio = await this.studiosService.findOne(+id);
     if (!studio)
@@ -47,6 +52,7 @@ export class StudiosController {
   }
 
   @Patch(':id')
+  @UseGuards(AdminGuard)
   async update(
     @Res() res,
     @Param('id') id: string,
@@ -65,6 +71,7 @@ export class StudiosController {
   }
 
   @Delete(':id')
+  @UseGuards(AdminGuard)
   async remove(@Res() res, @Param('id') id: string) {
     const result: DeleteResult = await this.studiosService.remove(+id);
 

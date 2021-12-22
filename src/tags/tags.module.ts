@@ -8,7 +8,7 @@ import { UsersModule } from 'src/users/users.module';
 import { TagSeederService } from './tag.seeder.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tag]), AuthModule, UsersModule],
+  imports: [TypeOrmModule.forFeature([Tag]), UsersModule, AuthModule],
   controllers: [TagsController],
   providers: [TagsService, TagSeederService],
   exports: [TypeOrmModule, TagsService, TagSeederService],
