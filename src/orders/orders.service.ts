@@ -83,12 +83,6 @@ export class OrdersService {
     if (action === ACTION.UPDATE) {
       order = await this.orderRepository.findOne(order_id);
       if (!order) throw new BadRequestException('Order not found');
-    } else if (action === ACTION.CREATE) {
-      order = await this.orderRepository.save({
-        user_id,
-        payment_method: order_dto.payment_method,
-        total_item_price,
-      });
     }
 
     const orderDetail = <OrderDetail>{
@@ -126,6 +120,14 @@ export class OrdersService {
 
     orderDetail.total_qty = total_qty;
     orderDetail.total_price = total_item_price;
+
+    if (action === ACTION.CREATE) {
+      order = await this.orderRepository.save({
+        user_id,
+        payment_method: order_dto.payment_method,
+        total_item_price,
+      });
+    }
 
     const queryRunner = this.connection.createQueryRunner();
 
