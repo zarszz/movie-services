@@ -7,6 +7,7 @@ import { MovieSchedulesModule } from 'src/movieschedules/movieschedules.module';
 import { OrderitemsModule } from 'src/orderitems/orderitems.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { CaslModule } from 'src/casl/casl.module';
+import { OrderSeederService } from './orders.seeder.service';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CaslModule } from 'src/casl/casl.module';
     AuthModule,
   ],
   controllers: [OrdersController],
-  providers: [OrdersService],
+  providers: [OrdersService, OrderSeederService],
+  exports: [OrderSeederService],
 })
 export class OrdersModule {}
