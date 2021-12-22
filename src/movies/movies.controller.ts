@@ -61,11 +61,13 @@ export class MoviesController {
   }
 
   @Get()
+  @UseGuards(AdminGuard)
   findAll() {
     return this.moviesService.findAll();
   }
 
   @Get(':id')
+  @UseGuards(AdminGuard)
   async findOne(@Res() response, @Param('id') id: string) {
     const movie = await this.moviesService.findOne(+id);
     if (!movie)

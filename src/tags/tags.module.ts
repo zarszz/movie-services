@@ -7,7 +7,7 @@ import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tag]), AuthModule, UsersModule],
+  imports: [TypeOrmModule.forFeature([Tag]), UsersModule, AuthModule],
   controllers: [TagsController],
   providers: [TagsService],
   exports: [TypeOrmModule, TagsService],

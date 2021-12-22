@@ -35,12 +35,14 @@ export class OrdersService {
     return results;
   }
 
-  findAll() {
-    return this.orderRepository.find();
+  findAll(user_id?: number) {
+    return user_id
+      ? this.orderRepository.find({ user_id })
+      : this.orderRepository.find();
   }
 
   findOne(id: number) {
-    return this.orderRepository.find({ id });
+    return this.orderRepository.findOne({ id });
   }
 
   async update(id: number, updateOrderDto: UpdateOrderDto) {

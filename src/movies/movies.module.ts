@@ -6,6 +6,7 @@ import { Movie } from './entity/movie.entity';
 import { TagsModule } from 'src/tags/tags.module';
 import { UsersModule } from 'src/users/users.module';
 import { AuthModule } from 'src/auth/auth.module';
+import { PublicMoviesController } from './public.movies.controller';
 
 @Module({
   imports: [
@@ -14,7 +15,7 @@ import { AuthModule } from 'src/auth/auth.module';
     UsersModule,
     AuthModule,
   ],
-  controllers: [MoviesController],
+  controllers: [MoviesController, PublicMoviesController],
   providers: [MoviesService],
   exports: [TypeOrmModule, MoviesService],
 })
