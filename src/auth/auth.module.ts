@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { UsersModule } from 'src/users/users.module';
 import { AuthService } from './auth.service';
@@ -17,7 +17,7 @@ import { AdminGuard } from './auth.guard';
       secret: new ConfigService().get('JWT_SECRET'),
       signOptions: { expiresIn: `${(60 * 60 * 24 * 30).toString()}s` },
     }),
-    UsersModule,
+    forwardRef(() => UsersModule),
   ],
   exports: [AdminGuard],
 })
