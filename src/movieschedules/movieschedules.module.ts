@@ -8,6 +8,7 @@ import { StudiosModule } from 'src/studios/studios.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { UsersModule } from 'src/users/users.module';
 import { MovieScheduleSeederService } from './movieschedules.seeder.service';
+import { PublicMovieschedulesController } from './public.movieschedules.controller';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { MovieScheduleSeederService } from './movieschedules.seeder.service';
     UsersModule,
     AuthModule,
   ],
-  controllers: [MovieSchedulesController],
+  controllers: [MovieSchedulesController, PublicMovieschedulesController],
   providers: [MovieSchedulesService, MovieScheduleSeederService],
   exports: [MovieSchedulesService, MovieScheduleSeederService],
 })
