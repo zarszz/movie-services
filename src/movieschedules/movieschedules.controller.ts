@@ -68,6 +68,7 @@ export class MovieSchedulesController {
   }
 
   @Get(':id')
+  @UseGuards(AdminGuard)
   async findOne(@Res() res, @Param('id') id: string) {
     const movieSchedule = await this.movieschedulesService.findOne(+id);
     return makeResponse(res, true, 200, movieSchedule, 'Operasi Berhasil');
