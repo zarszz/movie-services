@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { Order } from 'src/orders/entity/order.entity';
 import {
   Column,
@@ -22,6 +23,7 @@ export class User {
   @Column()
   email: string;
 
+  @Exclude()
   @Column()
   password: string;
 
