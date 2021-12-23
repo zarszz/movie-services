@@ -30,13 +30,13 @@ export class OrderItem {
   movie_schedule_id: number;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  updated_at: Date;
 
   @DeleteDateColumn({ name: 'deleted_at' })
-  deletedAt: Date;
+  deleted_at: Date;
 
   @ManyToOne(() => Order, (order) => order.order_items)
   order: Order;
