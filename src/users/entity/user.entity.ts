@@ -29,16 +29,16 @@ export class User {
   avatar: string;
 
   @Column({ default: false })
-  isAdmin: boolean;
+  is_admin: boolean;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date;
+  created_at: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date;
+  updated_at: Date;
 
   @DeleteDateColumn({ name: 'deleted_at' })
-  deletedAt: Date;
+  deleted_at: Date;
 
   @OneToMany(() => Order, (order) => order.user)
   orders: Order[];
