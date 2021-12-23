@@ -6,6 +6,8 @@ import { LoginDto } from './dto/login-dto';
 import { JwtService } from '@nestjs/jwt';
 import { SuccessLogin } from './type/login';
 
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -15,7 +17,7 @@ export class AuthService {
 
   async login(loginDto: LoginDto): Promise<SuccessLogin> {
     const user: User = await this.usersService.findByEmail(loginDto.email);
-    if (user && user.password === loginDto.password) {
+    if (user && (await bcrypt.compare(loginDto.password, user.password))) {
       const _token = this.jwtService.sign({
         email: user.email,
         sub: user.id,

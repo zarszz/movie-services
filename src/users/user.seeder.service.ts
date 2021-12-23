@@ -4,6 +4,8 @@ import { User } from 'src/users/entity/user.entity';
 import { Repository } from 'typeorm';
 import { IUser, users } from './type/user.seeder';
 
+import * as bcrypt from 'bcrypt';
+
 @Injectable()
 export class UserSeederService {
   constructor(
@@ -13,6 +15,7 @@ export class UserSeederService {
 
   create(): Promise<User>[] {
     return users.map(async (user: IUser) => {
+      user.password = await bcrypt.hash(user.password, 10);
       return await this.userRepository.save(<User>user);
     });
   }

@@ -19,6 +19,7 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user-dto';
 import { LoginDto } from './dto/login-dto';
 import { SuccessLogin } from './type/login';
+import * as bcrypt from 'bcrypt';
 
 @Controller('auth')
 export class AuthController {
@@ -46,6 +47,7 @@ export class AuthController {
       if (!file) throw new Error('Not image provided');
       userDto.avatar =
         new ConfigService().get('SERVE_STATIC') + '/avatar/' + file.filename;
+      userDto.password = await bcrypt.hash(userDto.password, 10);
       const createdUser: User = await this.userService.create(<User>userDto);
       return makeResponse(
         res,
