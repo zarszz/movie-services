@@ -49,7 +49,7 @@ export class OrdersController {
   @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Res() res, @GetUser() user: User) {
-    const results = user.isAdmin
+    const results = user.is_admin
       ? await this.ordersService.findAll()
       : await this.ordersService.findAll(user.id);
 

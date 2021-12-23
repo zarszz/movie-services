@@ -3,7 +3,7 @@ export type IUser = {
   email: string;
   password: string;
   avatar: string;
-  isAdmin: boolean;
+  is_admin: boolean;
 };
 
 export const users: IUser[] = [
@@ -12,20 +12,20 @@ export const users: IUser[] = [
     email: 'admin@email.com',
     password: 'password',
     avatar: 'https://via.placeholder.com/100',
-    isAdmin: true,
+    is_admin: true,
   },
   {
     name: 'ucup',
     email: 'ucup@email.com',
     password: 'password',
     avatar: 'https://via.placeholder.com/100',
-    isAdmin: false,
+    is_admin: false,
   },
   {
     name: 'udin',
     email: 'udin@email.com',
     password: 'password',
     avatar: 'https://via.placeholder.com/100',
-    isAdmin: false,
+    is_admin: false,
   },
 ];

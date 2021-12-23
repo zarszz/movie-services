@@ -16,7 +16,7 @@ export class CaslAbilityFactory {
       Ability as AbilityClass<AppAbility>,
     );
 
-    if (user.isAdmin) {
+    if (user.is_admin) {
       can(Action.Manage, 'all');
     }
 
