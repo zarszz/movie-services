@@ -3,7 +3,7 @@ import { makeResponse } from 'src/utils/http.utils';
 import { Movieschedule } from './entity/movieschedule.entity';
 import { MovieSchedulesService } from './movieschedules.service';
 
-@Controller('schedules/movies')
+@Controller({ path: 'schedules/movies', version: '1' })
 export class PublicMovieschedulesController {
   constructor(private readonly movieScheduleService: MovieSchedulesService) {}
   @Get()
