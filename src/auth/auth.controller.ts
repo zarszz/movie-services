@@ -21,7 +21,7 @@ import { LoginDto } from './dto/login-dto';
 import { SuccessLogin } from './type/login';
 import * as bcrypt from 'bcrypt';
 
-@Controller('auth')
+@Controller({ path: 'auth', version: '1' })
 export class AuthController {
   constructor(
     private readonly userService: UsersService,

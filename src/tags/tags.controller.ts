@@ -18,7 +18,7 @@ import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { AdminGuard } from 'src/auth/auth.guard';
 
-@Controller('backoffice/tags')
+@Controller({ path: 'backoffice/tags', version: '1' })
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
 

@@ -18,7 +18,7 @@ import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { AdminGuard } from 'src/auth/auth.guard';
 
-@Controller('backoffice/studios')
+@Controller({ path: 'backoffice/studios', version: '1' })
 export class StudiosController {
   constructor(private readonly studiosService: StudiosService) {}
 

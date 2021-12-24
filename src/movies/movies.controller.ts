@@ -24,7 +24,7 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 import { response } from 'express';
 import { AdminGuard } from 'src/auth/auth.guard';
 
-@Controller('backoffice/movies')
+@Controller({ path: 'backoffice/movies', version: '1' })
 export class MoviesController {
   constructor(
     private readonly tagsService: TagsService,

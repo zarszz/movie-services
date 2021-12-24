@@ -23,7 +23,7 @@ import { User } from 'src/users/entity/user.entity';
 import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { Action } from 'src/casl/type/casl.type';
 
-@Controller('orders')
+@Controller({ path: 'orders', version: '1' })
 export class OrdersController {
   constructor(
     private readonly ordersService: OrdersService,
@@ -76,7 +76,7 @@ export class OrdersController {
     @Body() updateOrderDto: UpdateOrderDto,
     @GetUser() user: User,
   ) {
-    const order = await this.ordersService.findOne(+id)[0];
+    const order = await this.ordersService.findOne(+id);
     if (!order) throw new NotFoundException();
 
     const ability = this.caslAbilityFactory.createrForUser(user);
