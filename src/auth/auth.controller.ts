@@ -44,7 +44,16 @@ export class AuthController {
     @Body() userDto: CreateUserDto,
   ): Promise<Response> {
     try {
-      if (!file) throw new Error('Not image provided');
+      if (!file)
+        return makeResponse(
+          res,
+          false,
+          400,
+          null,
+          'No Avatar Image Provided !',
+        );
+      if (await this.userService.findByEmail(userDto.email))
+        return makeResponse(res, false, 400, null, 'Email Already Taken');
       userDto.avatar =
         new ConfigService().get('SERVE_STATIC') + '/avatar/' + file.filename;
       userDto.password = await bcrypt.hash(userDto.password, 10);
