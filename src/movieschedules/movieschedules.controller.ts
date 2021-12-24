@@ -21,7 +21,7 @@ import { makeResponse } from 'src/utils/http.utils';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { AdminGuard } from 'src/auth/auth.guard';
 
-@Controller('backoffice/schedules/movies')
+@Controller({ path: 'backoffice/schedules/movies', version: '1' })
 export class MovieSchedulesController {
   constructor(
     private readonly movieschedulesService: MovieSchedulesService,

@@ -42,7 +42,7 @@ export class OrdersService {
   }
 
   findOne(id: number) {
-    return this.orderRepository.findOne({ id });
+    return this.orderRepository.findOne(id);
   }
 
   async update(id: number, updateOrderDto: UpdateOrderDto) {

@@ -1,4 +1,8 @@
-import { ValidationError, ValidationPipe } from '@nestjs/common';
+import {
+  ValidationError,
+  ValidationPipe,
+  VersioningType,
+} from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationException } from './filters/validation.exception';
@@ -6,7 +10,10 @@ import { ValidationFilter } from './filters/validation.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.setGlobalPrefix('api/v1');
+  app.setGlobalPrefix('api');
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
   // app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new ValidationFilter());
   app.useGlobalPipes(
