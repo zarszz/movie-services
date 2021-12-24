@@ -1,3 +1,4 @@
+import { Movieschedule } from 'src/movieschedules/entity/movieschedule.entity';
 import { Order } from 'src/orders/entity/order.entity';
 import {
   Column,
@@ -40,4 +41,7 @@ export class OrderItem {
 
   @ManyToOne(() => Order, (order) => order.order_items)
   order: Order;
+
+  @ManyToOne(() => Movieschedule, { eager: true })
+  movie_schedule: Movieschedule;
 }
