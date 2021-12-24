@@ -2,7 +2,7 @@ import { Controller, Get, NotFoundException, Param, Res } from '@nestjs/common';
 import { makeResponse } from 'src/utils/http.utils';
 import { MoviesService } from './movies.service';
 
-@Controller('movies')
+@Controller({ path: 'movies', version: '1' })
 export class PublicMoviesController {
   constructor(private readonly movieService: MoviesService) {}
   @Get()
