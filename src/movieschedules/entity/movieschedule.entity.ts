@@ -43,7 +43,7 @@ export class Movieschedule {
   @DeleteDateColumn({ name: 'deleted_at' })
   deleted_at: Date;
 
-  @ManyToOne(() => Movie)
+  @ManyToOne(() => Movie, { eager: true })
   @JoinTable({
     name: 'movies',
     joinColumn: {
@@ -53,7 +53,7 @@ export class Movieschedule {
   })
   movie: Movie;
 
-  @ManyToOne(() => Studio)
+  @ManyToOne(() => Studio, { eager: true })
   @JoinTable({
     name: 'studios',
     joinColumn: {
