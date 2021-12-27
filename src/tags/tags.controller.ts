@@ -19,11 +19,11 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 import { AdminGuard } from 'src/auth/auth.guard';
 
 @Controller({ path: 'backoffice/tags', version: '1' })
+@UseGuards(AdminGuard)
 export class TagsController {
   constructor(private readonly tagsService: TagsService) {}
 
   @Post()
-  @UseGuards(AdminGuard)
   async create(@Res() response, @Body() createTagDto: CreateTagDto) {
     const tag: Tag = await this.tagsService.create(<Tag>createTagDto);
     return makeResponse(response, true, 200, tag, 'Operasi Berhasil');
@@ -46,7 +46,6 @@ export class TagsController {
   }
 
   @Patch(':id')
-  @UseGuards(AdminGuard)
   async update(
     @Res() response,
     @Param('id') id: string,
@@ -65,7 +64,6 @@ export class TagsController {
   }
 
   @Delete(':id')
-  @UseGuards(AdminGuard)
   async remove(@Res() response, @Param('id') id: string) {
     const result: DeleteResult = await this.tagsService.remove(+id);
 

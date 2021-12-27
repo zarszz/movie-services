@@ -24,13 +24,13 @@ import { CaslAbilityFactory } from 'src/casl/casl-ability.factory';
 import { Action } from 'src/casl/type/casl.type';
 
 @Controller({ path: 'orders', version: '1' })
+@UseGuards(JwtAuthGuard)
 export class OrdersController {
   constructor(
     private readonly ordersService: OrdersService,
     private caslAbilityFactory: CaslAbilityFactory,
   ) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post('checkout')
   async create(
     @Req() req,
@@ -46,7 +46,6 @@ export class OrdersController {
     return makeResponse(response, true, 200, result, 'Checkout Success');
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get()
   async findAll(@Res() res, @GetUser() user: User) {
     const results = user.is_admin
@@ -56,7 +55,6 @@ export class OrdersController {
     return makeResponse(res, true, 200, results, 'Operasi Berhasil');
   }
 
-  @UseGuards(JwtAuthGuard)
   @Get(':id')
   async findOne(@Res() res, @GetUser() user: User, @Param('id') id: string) {
     const order = await this.ordersService.findOne(+id);
@@ -68,7 +66,6 @@ export class OrdersController {
     return makeResponse(res, true, 200, order, 'Operasi Berhasil');
   }
 
-  @UseGuards(JwtAuthGuard)
   @Patch(':id')
   async update(
     @Res() response,
@@ -89,7 +86,6 @@ export class OrdersController {
     return makeResponse(response, true, 200, results, 'Update Berhasil');
   }
 
-  @UseGuards(JwtAuthGuard)
   @Delete(':id')
   async remove(@Res() res, @GetUser() user: User, @Param('id') id: string) {
     const order = await this.ordersService.findOne(+id);
