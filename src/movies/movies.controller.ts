@@ -25,6 +25,7 @@ import { response } from 'express';
 import { AdminGuard } from 'src/auth/auth.guard';
 
 @Controller({ path: 'backoffice/movies', version: '1' })
+@UseGuards(AdminGuard)
 export class MoviesController {
   constructor(
     private readonly tagsService: TagsService,
@@ -32,7 +33,6 @@ export class MoviesController {
   ) {}
 
   @Post()
-  @UseGuards(AdminGuard)
   @UseInterceptors(
     FileInterceptor('poster', {
       storage: diskStorage({
@@ -61,13 +61,11 @@ export class MoviesController {
   }
 
   @Get()
-  @UseGuards(AdminGuard)
   findAll() {
     return this.moviesService.findAll();
   }
 
   @Get(':id')
-  @UseGuards(AdminGuard)
   async findOne(@Res() response, @Param('id') id: string) {
     const movie = await this.moviesService.findOne(+id);
     if (!movie)
@@ -76,7 +74,6 @@ export class MoviesController {
   }
 
   @Patch(':id')
-  @UseGuards(AdminGuard)
   async update(
     @Res() response,
     @Param('id') id: string,
@@ -92,7 +89,6 @@ export class MoviesController {
   }
 
   @Delete(':id')
-  @UseGuards(AdminGuard)
   async remove(@Param('id') id: string) {
     const result: DeleteResult = await this.moviesService.remove(+id);
     if (result.affected < 1)

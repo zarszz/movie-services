@@ -22,6 +22,7 @@ import { DeleteResult, UpdateResult } from 'typeorm';
 import { AdminGuard } from 'src/auth/auth.guard';
 
 @Controller({ path: 'backoffice/schedules/movies', version: '1' })
+@UseGuards(AdminGuard)
 export class MovieSchedulesController {
   constructor(
     private readonly movieschedulesService: MovieSchedulesService,
@@ -30,7 +31,6 @@ export class MovieSchedulesController {
   ) {}
 
   @Post()
-  @UseGuards(AdminGuard)
   async create(
     @Res() response,
     @Body() createMoviescheduleDto: CreateMoviescheduleDto,
@@ -60,7 +60,6 @@ export class MovieSchedulesController {
   }
 
   @Get()
-  @UseGuards(AdminGuard)
   async findAll(@Res() res) {
     const movieSchedules: Movieschedule[] =
       await this.movieschedulesService.findAll();
@@ -68,14 +67,12 @@ export class MovieSchedulesController {
   }
 
   @Get(':id')
-  @UseGuards(AdminGuard)
   async findOne(@Res() res, @Param('id') id: string) {
     const movieSchedule = await this.movieschedulesService.findOne(+id);
     return makeResponse(res, true, 200, movieSchedule, 'Operasi Berhasil');
   }
 
   @Patch(':id')
-  @UseGuards(AdminGuard)
   async update(
     @Res() res,
     @Param('id') id: string,
@@ -95,7 +92,6 @@ export class MovieSchedulesController {
   }
 
   @Delete(':id')
-  @UseGuards(AdminGuard)
   async remove(@Res() res, @Param('id') id: string) {
     const result: DeleteResult = await this.movieschedulesService.remove(+id);
 
