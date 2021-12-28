@@ -17,6 +17,7 @@ export class AdminGuard implements CanActivate {
     const signed = verify(token, new ConfigService().get('JWT_SECRET'));
 
     const user: User = await this.userService.findByEmail(signed['email']);
+    if (!user) return false;
 
     return user.is_admin;
   }
