@@ -48,5 +48,5 @@ export class Movie {
       referencedColumnName: 'id',
     },
   })
-  movieTags: Tag[];
+  movie_tags: Tag[];
 }
