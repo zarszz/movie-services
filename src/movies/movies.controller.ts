@@ -55,9 +55,9 @@ export class MoviesController {
         async (id) => await this.tagsService.findOne(+id),
       ),
     );
-    movieObj.movieTags = tags;
-    const movie = await this.moviesService.save(movieObj);
-    return makeResponse(res, true, 200, movie, 'Operasi Berhasil');
+    movieObj.movie_tags = tags;
+    this.moviesService.save(movieObj);
+    return makeResponse(res, true, 200, null, 'Operasi Berhasil');
   }
 
   @Get()

@@ -20,7 +20,7 @@ export class MovieSeederService {
       const tags = await Promise.all(
         movie.tags.map(async (tag) => await this.tagService.findOne(+tag)),
       );
-      movieObj.movieTags = tags;
+      movieObj.movie_tags = tags;
       const createdMovies = await this.movieRepository.save(movieObj);
       return createdMovies;
     });
