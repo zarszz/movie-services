@@ -22,14 +22,14 @@ export class MoviesService {
   findAll() {
     return this.movieRepository
       .createQueryBuilder('movie')
-      .leftJoinAndSelect('movie.movieTags', 'tag')
+      .leftJoinAndSelect('movie.movie_tags', 'tag')
       .getMany();
   }
 
   findOne(id: number) {
     return this.movieRepository
       .createQueryBuilder('movie')
-      .leftJoinAndSelect('movie.movieTags', 'tag')
+      .leftJoinAndSelect('movie.movie_tags', 'tag')
       .where('movie.id = :id', { id })
       .getMany();
   }
