@@ -5,6 +5,13 @@ import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
 import { Movie } from './entity/movie.entity';
 
+import {
+  IPaginationOptions,
+  Pagination,
+  paginate,
+} from 'nestjs-typeorm-paginate';
+import { MovieSearchDto } from './type/movie.search';
+
 @Injectable()
 export class MoviesService {
   constructor(
@@ -32,6 +39,28 @@ export class MoviesService {
       .leftJoinAndSelect('movie.movie_tags', 'tag')
       .where('movie.id = :id', { id })
       .getMany();
+  }
+
+  async paginate(
+    options: IPaginationOptions,
+    searchParam: MovieSearchDto,
+  ): Promise<Pagination<Movie>> {
+    let queryBuilder = this.movieRepository
+      .createQueryBuilder('movie')
+      .leftJoinAndSelect('movie.movie_tags', 'tag');
+    if (searchParam.term) {
+      queryBuilder = queryBuilder
+        .where('title LIKE :term', { term: `%${searchParam.term}%` })
+        .orWhere('overview LIKE :term', { term: `%${searchParam.term}%` });
+    }
+    if (searchParam.tags) {
+      searchParam.tags.split(',').map((param) => {
+        queryBuilder = queryBuilder.orWhere('tag.name LIKE :tag ', {
+          tag: `%${param}%`,
+        });
+      });
+    }
+    return paginate(queryBuilder, options);
   }
 
   update(id: number, updateMovieDto: UpdateMovieDto) {
