@@ -34,6 +34,7 @@ import { CaslModule } from './casl/casl.module';
           await getConnectionOptions(),
           {
             namingStrategy: new SnakeNamingStrategy(),
+            autoLoadEntities: true,
           },
         );
       },
